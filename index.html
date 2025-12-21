@@ -1,0 +1,659 @@
+<!doctype html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BelaDent • Clinică Stomatologică</title>
+  <meta name="description" content="BelaDent – stomatologie modernă: implantologie, ortodonție, estetică dentară. Programări rapide și îngrijire premium." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ["Inter", "ui-sans-serif", "system-ui"] },
+          boxShadow: { soft: "0 20px 60px rgba(2, 6, 23, .12)" }
+        }
+      }
+    }
+  </script>
+
+  <!-- AOS (scroll animations) -->
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet"/>
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+
+  <style>
+    :root { color-scheme: light; }
+    /* Smooth scroll */
+    html { scroll-behavior: smooth; }
+
+    /* Animated gradient blob */
+    .blob {
+      filter: blur(40px);
+      opacity: .6;
+      animation: floaty 10s ease-in-out infinite;
+    }
+    @keyframes floaty {
+      0%, 100% { transform: translate(0,0) scale(1); }
+      50% { transform: translate(24px,-18px) scale(1.06); }
+    }
+
+    /* Subtle grain */
+    .grain:before{
+      content:"";
+      position:absolute; inset:0;
+      background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="180" height="180"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="3" stitchTiles="stitch"/></filter><rect width="180" height="180" filter="url(%23n)" opacity=".12"/></svg>');
+      mix-blend-mode: overlay;
+      opacity:.25;
+      pointer-events:none;
+    }
+
+    /* Fancy button shine */
+    .shine {
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+    }
+    .shine:after{
+      content:"";
+      position:absolute;
+      inset:-200%;
+      background: linear-gradient(120deg, transparent 40%, rgba(255,255,255,.45) 50%, transparent 60%);
+      transform: translateX(-35%);
+      animation: shine 4.5s ease-in-out infinite;
+      z-index: -1;
+    }
+    @keyframes shine {
+      0% { transform: translateX(-35%) rotate(10deg); opacity: 0; }
+      15% { opacity: .9; }
+      45% { opacity: 0; transform: translateX(35%) rotate(10deg); }
+      100% { opacity: 0; }
+    }
+
+    /* Floating cards */
+    .float-card { animation: cardFloat 6.5s ease-in-out infinite; }
+    @keyframes cardFloat { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+
+    /* Glass effect */
+    .glass {
+      background: rgba(255,255,255,.7);
+      border: 1px solid rgba(255,255,255,.55);
+      backdrop-filter: blur(10px);
+    }
+
+    /* Navbar blur on scroll */
+    .nav-scrolled {
+      background: rgba(255,255,255,.8);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 10px 30px rgba(2,6,23,.08);
+      border-bottom: 1px solid rgba(2,6,23,.06);
+    }
+
+    /* Smooth appearing counter */
+    .counter { font-variant-numeric: tabular-nums; }
+  </style>
+</head>
+
+<body class="font-sans text-slate-900 bg-slate-50">
+  <!-- Top gradient backdrop -->
+  <div class="relative overflow-hidden">
+    <div class="absolute inset-0">
+      <div class="blob absolute -top-24 -left-24 h-80 w-80 rounded-full bg-cyan-300"></div>
+      <div class="blob absolute -top-16 left-1/2 h-96 w-96 -translate-x-1/2 rounded-full bg-indigo-300" style="animation-delay: -2s"></div>
+      <div class="blob absolute -top-24 -right-24 h-80 w-80 rounded-full bg-emerald-300" style="animation-delay: -4s"></div>
+    </div>
+
+    <!-- NAV -->
+    <header id="nav" class="sticky top-0 z-50 transition-all">
+      <nav class="mx-auto max-w-6xl px-4 py-3">
+        <div class="glass rounded-2xl px-4 py-3 flex items-center justify-between">
+          <a href="#home" class="flex items-center gap-3">
+            <div class="h-10 w-10 rounded-xl bg-gradient-to-br from-cyan-500 to-indigo-500 grid place-items-center shadow-soft">
+              <span class="text-white font-extrabold">B</span>
+            </div>
+            <div class="leading-tight">
+              <div class="font-extrabold tracking-tight">BelaDent</div>
+              <div class="text-xs text-slate-500">Stomatologie modernă</div>
+            </div>
+          </a>
+
+          <div class="hidden md:flex items-center gap-6 text-sm">
+            <a class="hover:text-indigo-600 transition" href="#servicii">Servicii</a>
+            <a class="hover:text-indigo-600 transition" href="#echipa">Echipă</a>
+            <a class="hover:text-indigo-600 transition" href="#preturi">Prețuri</a>
+            <a class="hover:text-indigo-600 transition" href="#recenzii">Recenzii</a>
+            <a class="hover:text-indigo-600 transition" href="#contact">Contact</a>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <a href="tel:+37360000000"
+               class="hidden sm:inline-flex items-center gap-2 rounded-xl px-3 py-2 text-sm bg-white/70 hover:bg-white transition border border-white/60">
+              <span class="text-slate-700">📞</span>
+              <span class="font-semibold">+373 60 000 000</span>
+            </a>
+            <a href="#programare" class="shine inline-flex items-center gap-2 rounded-xl px-4 py-2 text-sm font-semibold text-white bg-slate-900 hover:bg-slate-800 transition shadow-soft">
+              Programează-te
+              <span aria-hidden="true">→</span>
+            </a>
+
+            <button id="menuBtn" class="md:hidden inline-flex h-10 w-10 items-center justify-center rounded-xl bg-white/70 hover:bg-white transition border border-white/60" aria-label="Meniu">
+              ☰
+            </button>
+          </div>
+        </div>
+
+        <!-- Mobile menu -->
+        <div id="mobileMenu" class="md:hidden mt-3 hidden">
+          <div class="glass rounded-2xl p-4 grid gap-3 text-sm">
+            <a class="hover:text-indigo-600 transition" href="#servicii">Servicii</a>
+            <a class="hover:text-indigo-600 transition" href="#echipa">Echipă</a>
+            <a class="hover:text-indigo-600 transition" href="#preturi">Prețuri</a>
+            <a class="hover:text-indigo-600 transition" href="#recenzii">Recenzii</a>
+            <a class="hover:text-indigo-600 transition" href="#contact">Contact</a>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <!-- HERO -->
+    <main id="home" class="relative grain">
+      <section class="mx-auto max-w-6xl px-4 pt-10 pb-14 md:pt-16">
+        <div class="grid lg:grid-cols-2 gap-10 items-center">
+          <div data-aos="fade-up" data-aos-duration="900">
+            <p class="inline-flex items-center gap-2 rounded-full bg-white/70 border border-white/60 px-4 py-2 text-sm text-slate-700">
+              <span class="h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
+              Programări rapide • Tehnologie modernă • Zâmbet natural
+            </p>
+
+            <h1 class="mt-5 text-4xl md:text-5xl font-extrabold tracking-tight leading-tight">
+              BelaDent – zâmbet premium,
+              <span class="bg-gradient-to-r from-cyan-600 to-indigo-600 bg-clip-text text-transparent">fără stres.</span>
+            </h1>
+
+            <p class="mt-4 text-slate-600 text-lg">
+              De la consultații și igienizare până la implanturi și estetică dentară – totul într-un spațiu calm,
+              cu medici atenți și explicații clare.
+            </p>
+
+            <div class="mt-7 flex flex-col sm:flex-row gap-3">
+              <a href="#programare" class="shine inline-flex items-center justify-center rounded-2xl px-6 py-3 font-semibold text-white bg-slate-900 hover:bg-slate-800 transition shadow-soft">
+                Programează o vizită
+              </a>
+              <a href="#servicii" class="inline-flex items-center justify-center rounded-2xl px-6 py-3 font-semibold bg-white/70 hover:bg-white transition border border-white/60">
+                Vezi serviciile
+              </a>
+            </div>
+
+            <!-- Quick stats -->
+            <div class="mt-8 grid grid-cols-3 gap-3">
+              <div class="glass rounded-2xl p-4" data-aos="zoom-in" data-aos-delay="100">
+                <div class="text-xs text-slate-500">Pacienți fericiți</div>
+                <div class="counter text-2xl font-extrabold" data-counter="4200">0</div>
+              </div>
+              <div class="glass rounded-2xl p-4" data-aos="zoom-in" data-aos-delay="200">
+                <div class="text-xs text-slate-500">Ani experiență</div>
+                <div class="counter text-2xl font-extrabold" data-counter="12">0</div>
+              </div>
+              <div class="glass rounded-2xl p-4" data-aos="zoom-in" data-aos-delay="300">
+                <div class="text-xs text-slate-500">Rating mediu</div>
+                <div class="counter text-2xl font-extrabold" data-counter="4.9">0</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hero card -->
+          <div class="relative" data-aos="fade-left" data-aos-duration="900">
+            <div class="float-card glass rounded-3xl p-6 shadow-soft">
+              <div class="flex items-start justify-between gap-4">
+                <div>
+                  <div class="text-sm text-slate-500">Astăzi</div>
+                  <div class="text-2xl font-extrabold">Consultație + Plan de tratament</div>
+                </div>
+                <div class="h-12 w-12 rounded-2xl bg-gradient-to-br from-emerald-500 to-cyan-500 grid place-items-center text-white text-xl">
+                  ✦
+                </div>
+              </div>
+
+              <div class="mt-5 grid gap-3">
+                <div class="rounded-2xl bg-white/70 border border-white/60 p-4 flex items-center justify-between">
+                  <div>
+                    <div class="font-semibold">Evaluare + radiografie (dacă e nevoie)</div>
+                    <div class="text-sm text-slate-500">Explicăm clar opțiunile și costurile</div>
+                  </div>
+                  <div class="text-sm font-semibold text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-100">
+                    30–40 min
+                  </div>
+                </div>
+
+                <div class="rounded-2xl bg-white/70 border border-white/60 p-4 flex items-center justify-between">
+                  <div>
+                    <div class="font-semibold">Programare online</div>
+                    <div class="text-sm text-slate-500">Confirmare rapidă pe telefon</div>
+                  </div>
+                  <div class="text-sm font-semibold text-indigo-700 bg-indigo-50 px-3 py-1 rounded-full border border-indigo-100">
+                    Simplu
+                  </div>
+                </div>
+
+                <div class="rounded-2xl bg-white/70 border border-white/60 p-4">
+                  <div class="font-semibold">De ce BelaDent?</div>
+                  <ul class="mt-2 text-sm text-slate-600 grid gap-1">
+                    <li>• Tehnologie modernă + materiale premium</li>
+                    <li>• Atmosferă calmă, fără grabă</li>
+                    <li>• Garanție și plan pe etape</li>
+                  </ul>
+                </div>
+
+                <a href="#programare" class="shine mt-2 inline-flex items-center justify-center rounded-2xl px-6 py-3 font-semibold text-white bg-slate-900 hover:bg-slate-800 transition shadow-soft">
+                  Prinde un loc liber
+                </a>
+              </div>
+            </div>
+
+            <div class="absolute -bottom-8 -left-6 hidden md:block">
+              <div class="glass rounded-2xl px-4 py-3 text-sm text-slate-700 shadow-soft" data-aos="fade-up" data-aos-delay="200">
+                ✅ Sterilizare & protocoale • 🦷 Micro-intervenții atraumatice
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- SERVICES -->
+  <section id="servicii" class="mx-auto max-w-6xl px-4 py-16">
+    <div class="flex items-end justify-between gap-6">
+      <div data-aos="fade-up">
+        <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight">Servicii care chiar contează</h2>
+        <p class="mt-3 text-slate-600 max-w-2xl">
+          Tratament corect, estetic și durabil. Fără “surprize”, fără alergătură.
+        </p>
+      </div>
+      <a href="#contact" class="hidden md:inline-flex rounded-2xl px-5 py-3 font-semibold bg-white border border-slate-200 hover:border-slate-300 hover:bg-slate-50 transition" data-aos="fade-left">
+        Cere o recomandare → 
+      </a>
+    </div>
+
+    <div class="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      <!-- Card -->
+      <div class="rounded-3xl bg-white p-6 shadow-soft border border-slate-100" data-aos="zoom-in" data-aos-delay="50">
+        <div class="h-12 w-12 rounded-2xl bg-cyan-50 grid place-items-center text-xl">🧼</div>
+        <h3 class="mt-4 font-extrabold text-lg">Igienizare & Profilaxie</h3>
+        <p class="mt-2 text-slate-600 text-sm">Detartraj ultrasonic, airflow, polishing – respirație fresh, gingii sănătoase.</p>
+      </div>
+
+      <div class="rounded-3xl bg-white p-6 shadow-soft border border-slate-100" data-aos="zoom-in" data-aos-delay="120">
+        <div class="h-12 w-12 rounded-2xl bg-indigo-50 grid place-items-center text-xl">🦷</div>
+        <h3 class="mt-4 font-extrabold text-lg">Estetică dentară</h3>
+        <p class="mt-2 text-slate-600 text-sm">Albire profesională, fațete, reconstrucții – aspect natural, nu “plastic”.</p>
+      </div>
+
+      <div class="rounded-3xl bg-white p-6 shadow-soft border border-slate-100" data-aos="zoom-in" data-aos-delay="190">
+        <div class="h-12 w-12 rounded-2xl bg-emerald-50 grid place-items-center text-xl">🧩</div>
+        <h3 class="mt-4 font-extrabold text-lg">Ortodonție</h3>
+        <p class="mt-2 text-slate-600 text-sm">Aparate metalice/ceramice și alignere. Plan clar, controale precise.</p>
+      </div>
+
+      <div class="rounded-3xl bg-white p-6 shadow-soft border border-slate-100" data-aos="zoom-in" data-aos-delay="70">
+        <div class="h-12 w-12 rounded-2xl bg-rose-50 grid place-items-center text-xl">🛠️</div>
+        <h3 class="mt-4 font-extrabold text-lg">Endodonție (canale)</h3>
+        <p class="mt-2 text-slate-600 text-sm">Tratament sub control, tehnici moderne – salvăm dintele, nu îl abandonăm.</p>
+      </div>
+
+      <div class="rounded-3xl bg-white p-6 shadow-soft border border-slate-100" data-aos="zoom-in" data-aos-delay="140">
+        <div class="h-12 w-12 rounded-2xl bg-amber-50 grid place-items-center text-xl">🧱</div>
+        <h3 class="mt-4 font-extrabold text-lg">Implantologie</h3>
+        <p class="mt-2 text-slate-600 text-sm">Implanturi premium, etapizare corectă, ghidaj și follow-up.</p>
+      </div>
+
+      <div class="rounded-3xl bg-white p-6 shadow-soft border border-slate-100" data-aos="zoom-in" data-aos-delay="210">
+        <div class="h-12 w-12 rounded-2xl bg-slate-100 grid place-items-center text-xl">🧾</div>
+        <h3 class="mt-4 font-extrabold text-lg">Protetica</h3>
+        <p class="mt-2 text-slate-600 text-sm">Coroane, punți, proteze – funcțional + estetic, adaptare perfectă.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEAM -->
+  <section id="echipa" class="bg-white">
+    <div class="mx-auto max-w-6xl px-4 py-16">
+      <div class="grid lg:grid-cols-2 gap-10 items-center">
+        <div data-aos="fade-right">
+          <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight">Echipă calmă, rezultate serioase</h2>
+          <p class="mt-3 text-slate-600">
+            Medici care îți explică pe înțeles și aleg varianta potrivită pentru tine, nu cea mai “scumpă”.
+          </p>
+
+          <div class="mt-7 grid gap-3">
+            <div class="rounded-2xl border border-slate-200 p-4">
+              <div class="font-semibold">🩺 Diagnostic corect</div>
+              <div class="text-sm text-slate-600">Plan pe etape + transparență la costuri.</div>
+            </div>
+            <div class="rounded-2xl border border-slate-200 p-4">
+              <div class="font-semibold">🧠 Explicații clare</div>
+              <div class="text-sm text-slate-600">Știi ce urmează, cât durează, cât costă.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid sm:grid-cols-2 gap-5" data-aos="fade-left">
+          <!-- Person -->
+          <div class="rounded-3xl bg-slate-50 p-5 border border-slate-100 shadow-soft">
+            <div class="h-14 w-14 rounded-2xl bg-gradient-to-br from-cyan-500 to-indigo-500 grid place-items-center text-white text-xl font-bold">
+              MD
+            </div>
+            <div class="mt-4 font-extrabold">Dr. Maria D.</div>
+            <div class="text-sm text-slate-600">Estetică & Protetica</div>
+            <div class="mt-3 text-sm text-slate-600">“Natural, discret, durabil.”</div>
+          </div>
+
+          <div class="rounded-3xl bg-slate-50 p-5 border border-slate-100 shadow-soft">
+            <div class="h-14 w-14 rounded-2xl bg-gradient-to-br from-emerald-500 to-cyan-500 grid place-items-center text-white text-xl font-bold">
+              IO
+            </div>
+            <div class="mt-4 font-extrabold">Dr. Ion O.</div>
+            <div class="text-sm text-slate-600">Implantologie</div>
+            <div class="mt-3 text-sm text-slate-600">“Precizie, etapizare, follow-up.”</div>
+          </div>
+
+          <div class="rounded-3xl bg-slate-50 p-5 border border-slate-100 shadow-soft">
+            <div class="h-14 w-14 rounded-2xl bg-gradient-to-br from-indigo-500 to-rose-500 grid place-items-center text-white text-xl font-bold">
+              AL
+            </div>
+            <div class="mt-4 font-extrabold">Dr. Ana L.</div>
+            <div class="text-sm text-slate-600">Endodonție</div>
+            <div class="mt-3 text-sm text-slate-600">“Salvăm dinții, nu improvizăm.”</div>
+          </div>
+
+          <div class="rounded-3xl bg-slate-50 p-5 border border-slate-100 shadow-soft">
+            <div class="h-14 w-14 rounded-2xl bg-gradient-to-br from-amber-500 to-emerald-500 grid place-items-center text-white text-xl font-bold">
+              OS
+            </div>
+            <div class="mt-4 font-extrabold">Dr. Ovidiu S.</div>
+            <div class="text-sm text-slate-600">Ortodonție</div>
+            <div class="mt-3 text-sm text-slate-600">“Aliniere corectă, confort.”</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section id="preturi" class="mx-auto max-w-6xl px-4 py-16">
+    <div class="flex items-end justify-between gap-6" data-aos="fade-up">
+      <div>
+        <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight">Prețuri orientative</h2>
+        <p class="mt-3 text-slate-600 max-w-2xl">
+          (exemple) – costul final depinde de complexitate și planul tău.
+        </p>
+      </div>
+      <div class="text-sm text-slate-500 hidden md:block">*Poți schimba valorile ușor în cod</div>
+    </div>
+
+    <div class="mt-10 grid lg:grid-cols-3 gap-5">
+      <div class="rounded-3xl bg-white p-6 border border-slate-100 shadow-soft" data-aos="fade-up" data-aos-delay="50">
+        <div class="text-sm text-slate-500">Start</div>
+        <div class="mt-2 text-2xl font-extrabold">Profilaxie</div>
+        <div class="mt-4 text-4xl font-extrabold">499 <span class="text-base font-semibold text-slate-500">MDL</span></div>
+        <ul class="mt-5 text-sm text-slate-600 grid gap-2">
+          <li>• Detartraj ultrasonic</li>
+          <li>• Airflow + polishing</li>
+          <li>• Recomandări personalizate</li>
+        </ul>
+        <a href="#programare" class="mt-6 inline-flex w-full justify-center rounded-2xl px-5 py-3 font-semibold bg-slate-900 text-white hover:bg-slate-800 transition">
+          Alege pachetul
+        </a>
+      </div>
+
+      <div class="rounded-3xl bg-gradient-to-br from-slate-900 to-slate-800 p-6 text-white shadow-soft" data-aos="fade-up" data-aos-delay="120">
+        <div class="text-sm text-white/70">Cel mai popular</div>
+        <div class="mt-2 text-2xl font-extrabold">Albire</div>
+        <div class="mt-4 text-4xl font-extrabold">1999 <span class="text-base font-semibold text-white/70">MDL</span></div>
+        <ul class="mt-5 text-sm text-white/80 grid gap-2">
+          <li>• Consult + evaluare</li>
+          <li>• Albire profesională</li>
+          <li>• Ghid “îngrijire după”</li>
+        </ul>
+        <a href="#programare" class="mt-6 inline-flex w-full justify-center rounded-2xl px-5 py-3 font-semibold bg-white text-slate-900 hover:bg-white/90 transition">
+          Programează
+        </a>
+      </div>
+
+      <div class="rounded-3xl bg-white p-6 border border-slate-100 shadow-soft" data-aos="fade-up" data-aos-delay="190">
+        <div class="text-sm text-slate-500">Premium</div>
+        <div class="mt-2 text-2xl font-extrabold">Implant (exemplu)</div>
+        <div class="mt-4 text-4xl font-extrabold">7999 <span class="text-base font-semibold text-slate-500">MDL</span></div>
+        <ul class="mt-5 text-sm text-slate-600 grid gap-2">
+          <li>• Plan etapizat</li>
+          <li>• Materiale premium</li>
+          <li>• Follow-up post-intervenție</li>
+        </ul>
+        <a href="#programare" class="mt-6 inline-flex w-full justify-center rounded-2xl px-5 py-3 font-semibold bg-slate-900 text-white hover:bg-slate-800 transition">
+          Cere ofertă
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- REVIEWS -->
+  <section id="recenzii" class="bg-white">
+    <div class="mx-auto max-w-6xl px-4 py-16">
+      <div data-aos="fade-up">
+        <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight">Recenzii (exemple)</h2>
+        <p class="mt-3 text-slate-600 max-w-2xl">
+          Aici poți pune recenziile reale de pe Google / Facebook.
+        </p>
+      </div>
+
+      <div class="mt-10 grid md:grid-cols-3 gap-5">
+        <div class="rounded-3xl bg-slate-50 p-6 border border-slate-100" data-aos="fade-up" data-aos-delay="60">
+          <div class="text-sm text-slate-500">★★★★★</div>
+          <div class="mt-3 font-semibold">“Fără durere, fără panică.”</div>
+          <p class="mt-2 text-sm text-slate-600">Mi-au explicat tot pe înțeles. Atmosferă super calmă.</p>
+          <div class="mt-4 text-sm text-slate-500">— Elena P.</div>
+        </div>
+
+        <div class="rounded-3xl bg-slate-50 p-6 border border-slate-100" data-aos="fade-up" data-aos-delay="140">
+          <div class="text-sm text-slate-500">★★★★★</div>
+          <div class="mt-3 font-semibold">“Foarte profi.”</div>
+          <p class="mt-2 text-sm text-slate-600">Plan clar, prețuri spuse din start. Recomand.</p>
+          <div class="mt-4 text-sm text-slate-500">— Andrei C.</div>
+        </div>
+
+        <div class="rounded-3xl bg-slate-50 p-6 border border-slate-100" data-aos="fade-up" data-aos-delay="220">
+          <div class="text-sm text-slate-500">★★★★★</div>
+          <div class="mt-3 font-semibold">“Zâmbet nou.”</div>
+          <p class="mt-2 text-sm text-slate-600">Fațetele arată natural. M-au ajutat mult.</p>
+          <div class="mt-4 text-sm text-slate-500">— Cristina R.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="mx-auto max-w-6xl px-4 py-16">
+    <div class="grid lg:grid-cols-2 gap-10 items-start">
+      <div data-aos="fade-right">
+        <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight">Întrebări rapide</h2>
+        <p class="mt-3 text-slate-600">Ca să nu stai cu emoții înainte de vizită.</p>
+      </div>
+
+      <div class="grid gap-3" data-aos="fade-left">
+        <details class="rounded-2xl bg-white border border-slate-100 p-4 shadow-soft">
+          <summary class="font-semibold cursor-pointer">Doare?</summary>
+          <p class="mt-2 text-sm text-slate-600">În majoritatea cazurilor, nu. Folosim tehnici atraumatice + anestezie modernă.</p>
+        </details>
+
+        <details class="rounded-2xl bg-white border border-slate-100 p-4 shadow-soft">
+          <summary class="font-semibold cursor-pointer">Cât durează o consultație?</summary>
+          <p class="mt-2 text-sm text-slate-600">De obicei 30–40 minute, în funcție de situație și investigații.</p>
+        </details>
+
+        <details class="rounded-2xl bg-white border border-slate-100 p-4 shadow-soft">
+          <summary class="font-semibold cursor-pointer">Pot plăti în rate?</summary>
+          <p class="mt-2 text-sm text-slate-600">Poți adăuga aici politica clinicii (rate, pachete, etapizare).</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT + BOOKING -->
+  <section id="contact" class="bg-white">
+    <div class="mx-auto max-w-6xl px-4 py-16">
+      <div class="grid lg:grid-cols-2 gap-10">
+        <div data-aos="fade-up">
+          <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight">Contact</h2>
+          <p class="mt-3 text-slate-600">
+            Adresă, program, telefon – completează aici datele reale ale BelaDent.
+          </p>
+
+          <div class="mt-7 grid gap-3">
+            <div class="rounded-2xl border border-slate-200 p-4">
+              <div class="text-sm text-slate-500">Adresă</div>
+              <div class="font-semibold">Chișinău, str. Exemplu 10</div>
+            </div>
+            <div class="rounded-2xl border border-slate-200 p-4">
+              <div class="text-sm text-slate-500">Telefon</div>
+              <a class="font-semibold hover:text-indigo-600 transition" href="tel:+37360000000">+373 60 000 000</a>
+            </div>
+            <div class="rounded-2xl border border-slate-200 p-4">
+              <div class="text-sm text-slate-500">Program</div>
+              <div class="font-semibold">Lun–Sâm: 09:00–19:00</div>
+            </div>
+          </div>
+
+          <div class="mt-7 rounded-3xl bg-slate-50 border border-slate-100 p-6" data-aos="zoom-in" data-aos-delay="120">
+            <div class="font-extrabold text-lg">Mini-promisiune BelaDent</div>
+            <p class="mt-2 text-sm text-slate-600">
+              Spunem clar ce ai, ce opțiuni sunt și ce costă – înainte de tratament.
+            </p>
+          </div>
+        </div>
+
+        <div id="programare" class="rounded-3xl bg-slate-900 text-white p-7 shadow-soft" data-aos="fade-left">
+          <h3 class="text-2xl font-extrabold tracking-tight">Programare online</h3>
+          <p class="mt-2 text-white/70 text-sm">Completezi 30 secunde. Te sunăm pentru confirmare.</p>
+
+          <form class="mt-6 grid gap-4" onsubmit="return handleSubmit(event)">
+            <div class="grid sm:grid-cols-2 gap-4">
+              <label class="grid gap-2">
+                <span class="text-sm text-white/80">Nume</span>
+                <input required class="rounded-2xl bg-white/10 border border-white/10 px-4 py-3 outline-none focus:border-white/30" placeholder="Ex: Igor Tomșa" />
+              </label>
+              <label class="grid gap-2">
+                <span class="text-sm text-white/80">Telefon</span>
+                <input required class="rounded-2xl bg-white/10 border border-white/10 px-4 py-3 outline-none focus:border-white/30" placeholder="+373 ..." />
+              </label>
+            </div>
+
+            <label class="grid gap-2">
+              <span class="text-sm text-white/80">Serviciu</span>
+              <select class="rounded-2xl bg-white/10 border border-white/10 px-4 py-3 outline-none focus:border-white/30">
+                <option class="text-slate-900">Consultație</option>
+                <option class="text-slate-900">Igienizare</option>
+                <option class="text-slate-900">Albire</option>
+                <option class="text-slate-900">Ortodonție</option>
+                <option class="text-slate-900">Implantologie</option>
+              </select>
+            </label>
+
+            <label class="grid gap-2">
+              <span class="text-sm text-white/80">Mesaj (opțional)</span>
+              <textarea class="min-h-[110px] rounded-2xl bg-white/10 border border-white/10 px-4 py-3 outline-none focus:border-white/30" placeholder="Spune pe scurt ce te doare / ce îți dorești"></textarea>
+            </label>
+
+            <button class="shine rounded-2xl px-6 py-3 font-semibold bg-white text-slate-900 hover:bg-white/90 transition">
+              Trimite programarea
+            </button>
+
+            <p id="formMsg" class="text-sm text-white/70"></p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="py-10">
+    <div class="mx-auto max-w-6xl px-4 flex flex-col md:flex-row gap-4 items-center justify-between">
+      <div class="text-sm text-slate-500">
+        © <span id="year"></span> BelaDent. Toate drepturile rezervate.
+      </div>
+      <div class="text-sm text-slate-500 flex items-center gap-4">
+        <a class="hover:text-indigo-600 transition" href="#home">Sus ↑</a>
+        <a class="hover:text-indigo-600 transition" href="#contact">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Init AOS
+    AOS.init({ once: true, offset: 80 });
+
+    // Year
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Sticky nav effect
+    const nav = document.getElementById("nav");
+    const onScroll = () => {
+      if (window.scrollY > 8) nav.classList.add("nav-scrolled");
+      else nav.classList.remove("nav-scrolled");
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+
+    // Mobile menu toggle
+    const menuBtn = document.getElementById("menuBtn");
+    const mobileMenu = document.getElementById("mobileMenu");
+    menuBtn?.addEventListener("click", () => {
+      mobileMenu.classList.toggle("hidden");
+    });
+    mobileMenu?.querySelectorAll("a").forEach(a => a.addEventListener("click", () => mobileMenu.classList.add("hidden")));
+
+    // Animated counters when visible
+    const counters = document.querySelectorAll("[data-counter]");
+    const animateCounter = (el, target) => {
+      const isFloat = String(target).includes(".");
+      const duration = 1200;
+      const start = performance.now();
+      const from = 0;
+
+      const step = (t) => {
+        const p = Math.min((t - start) / duration, 1);
+        const val = from + (target - from) * (1 - Math.pow(1 - p, 3)); // easeOutCubic
+        el.textContent = isFloat ? val.toFixed(1) : Math.round(val).toString();
+        if (p < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    };
+
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          const el = e.target;
+          const target = Number(el.getAttribute("data-counter"));
+          if (!el.dataset.done) {
+            el.dataset.done = "1";
+            animateCounter(el, target);
+          }
+        }
+      });
+    }, { threshold: 0.35 });
+
+    counters.forEach(c => io.observe(c));
+
+    // Fake form submit (you can connect to backend later)
+    function handleSubmit(event) {
+      event.preventDefault();
+      const msg = document.getElementById("formMsg");
+      msg.textContent = "✅ Cererea a fost trimisă (demo). Conectează formularul la email/CRM când vrei.";
+      msg.classList.add("opacity-100");
+      event.target.reset();
+      return false;
+    }
+  </script>
+</body>
+</html>
