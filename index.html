@@ -547,44 +547,105 @@
           <h3 class="text-2xl font-extrabold tracking-tight">Programare online</h3>
           <p class="mt-2 text-white/70 text-sm">Completezi 30 secunde. Te sunăm pentru confirmare.</p>
 
-          <form class="mt-6 grid gap-4" onsubmit="return handleSubmit(event)">
-            <div class="grid sm:grid-cols-2 gap-4">
-              <label class="grid gap-2">
-                <span class="text-sm text-white/80">Nume</span>
-                <input required class="rounded-2xl bg-white/10 border border-white/10 px-4 py-3 outline-none focus:border-white/30" placeholder="Ex: Ion Popescu" />
-              </label>
-              <label class="grid gap-2">
-                <span class="text-sm text-white/80">Telefon</span>
-                <input required class="rounded-2xl bg-white/10 border border-white/10 px-4 py-3 outline-none focus:border-white/30" placeholder="+373 ..." />
-              </label>
-            </div>
+        <form
+  action="https://formspree.io/f/xreganrj"
+  method="POST"
+  class="mt-6 grid gap-4"
+>
+  <div class="grid sm:grid-cols-2 gap-4">
+    <label class="grid gap-2">
+      <span class="text-sm text-white/80">Nume</span>
+      <input
+        name="Nume"
+        required
+        class="rounded-2xl bg-white/10 border border-white/10 px-4 py-3 outline-none focus:border-white/30"
+        placeholder="Ex: Ion Popescu"
+      />
+    </label>
 
-            <label class="grid gap-2">
-              <span class="text-sm text-white/80">Serviciu</span>
-              <select class="rounded-2xl bg-white/10 border border-white/10 px-4 py-3 outline-none focus:border-white/30">
-                <option class="text-slate-900">Consultație</option>
-                <option class="text-slate-900">Igienizare</option>
-                <option class="text-slate-900">Albire</option>
-                <option class="text-slate-900">Ortodonție</option>
-                <option class="text-slate-900">Implantologie</option>
-              </select>
-            </label>
+    <label class="grid gap-2">
+      <span class="text-sm text-white/80">Telefon</span>
+      <input
+        name="Telefon"
+        required
+        class="rounded-2xl bg-white/10 border border-white/10 px-4 py-3 outline-none focus:border-white/30"
+        placeholder="+373 ..."
+      />
+    </label>
+  </div>
 
-            <label class="grid gap-2">
-              <span class="text-sm text-white/80">Mesaj (opțional)</span>
-              <textarea class="min-h-[110px] rounded-2xl bg-white/10 border border-white/10 px-4 py-3 outline-none focus:border-white/30" placeholder="Spune pe scurt ce te doare / ce îți dorești"></textarea>
-            </label>
+  <div class="grid sm:grid-cols-2 gap-4">
+    <label class="grid gap-2">
+      <span class="text-sm text-white/80">Email</span>
+      <input
+        type="email"
+        name="Email"
+        required
+        class="rounded-2xl bg-white/10 border border-white/10 px-4 py-3 outline-none focus:border-white/30"
+        placeholder="exemplu@gmail.com"
+      />
+    </label>
 
-            <button class="shine rounded-2xl px-6 py-3 font-semibold bg-white text-slate-900 hover:bg-white/90 transition">
-              Trimite programarea
-            </button>
+    <label class="grid gap-2">
+      <span class="text-sm text-white/80">Data dorită</span>
+      <input
+        type="date"
+        name="Data dorită"
+        required
+        class="rounded-2xl bg-white/10 border border-white/10 px-4 py-3 outline-none focus:border-white/30"
+      />
+    </label>
+  </div>
 
-            <p id="formMsg" class="text-sm text-white/70"></p>
-          </form>
-        </div>
-      </div>
-    </div>
-  </section>
+  <div class="grid sm:grid-cols-2 gap-4">
+    <label class="grid gap-2">
+      <span class="text-sm text-white/80">Ora dorită</span>
+      <input
+        type="time"
+        name="Ora dorită"
+        required
+        class="rounded-2xl bg-white/10 border border-white/10 px-4 py-3 outline-none focus:border-white/30"
+      />
+    </label>
+
+    <label class="grid gap-2">
+      <span class="text-sm text-white/80">Serviciu</span>
+      <select
+        name="Serviciu"
+        required
+        class="rounded-2xl bg-white/10 border border-white/10 px-4 py-3 outline-none focus:border-white/30"
+      >
+        <option value="" disabled selected class="text-slate-900">Alege serviciul</option>
+        <option class="text-slate-900">Consultație</option>
+        <option class="text-slate-900">Igienizare</option>
+        <option class="text-slate-900">Albire</option>
+        <option class="text-slate-900">Ortodonție</option>
+        <option class="text-slate-900">Implantologie</option>
+      </select>
+    </label>
+  </div>
+
+  <label class="grid gap-2">
+    <span class="text-sm text-white/80">Mesaj (opțional)</span>
+    <textarea
+      name="Mesaj"
+      class="min-h-[110px] rounded-2xl bg-white/10 border border-white/10 px-4 py-3 outline-none focus:border-white/30"
+      placeholder="Spune pe scurt ce te doare / ce îți dorești"
+    ></textarea>
+  </label>
+
+  <!-- anti-spam -->
+  <input type="text" name="_gotcha" class="hidden" />
+
+  <button class="shine rounded-2xl px-6 py-3 font-semibold bg-white text-slate-900 hover:bg-white/90 transition">
+    Trimite programarea
+  </button>
+
+  <p class="text-sm text-white/70">
+    Vei primi confirmare pe email. Te contactăm rapid.
+  </p>
+</form>
+
 
   <!-- FOOTER -->
   <footer class="py-10">
@@ -649,15 +710,6 @@
     }, { threshold: 0.35 });
 
     counters.forEach(c => io.observe(c));
-
-    function handleSubmit(event) {
-      event.preventDefault();
-      const msg = document.getElementById("formMsg");
-      msg.textContent = "✅ Cererea a fost trimisă (demo). Conectează formularul la email/CRM când vrei.";
-      msg.classList.add("opacity-100");
-      event.target.reset();
-      return false;
-    }
   </script>
 </body>
 </html>
