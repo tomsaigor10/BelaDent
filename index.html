@@ -649,7 +649,17 @@
       </div>
     </div>
   </footer>
-
+ <!-- BUTON FLOTANT "Sună acum" (pune-l aici) -->
+  <a href="tel:+37367559956"
+     id="callFloat"
+     class="fixed bottom-5 right-5 z-50 hidden
+            items-center gap-2
+            rounded-full px-4 py-3
+            bg-slate-900 text-white
+            font-semibold text-sm shadow-xl">
+    <img src="mobile.png" alt="" class="w-5 h-5">
+    Sună acum
+  </a>
   <script>
     AOS.init({ once: true, offset: 80 });
 
@@ -700,6 +710,14 @@
     }, { threshold: 0.35 });
 
     counters.forEach(c => io.observe(c));
+  const callBtn = document.getElementById("callFloat");
+    const toggleCall = () => {
+      if (!callBtn) return;
+      if (window.scrollY > 150) callBtn.classList.remove("hidden");
+      else callBtn.classList.add("hidden");
+    };
+    toggleCall();
+    window.addEventListener("scroll", toggleCall, { passive: true });
   </script>
 </body>
 </html>
