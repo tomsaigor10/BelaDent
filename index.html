@@ -128,7 +128,7 @@
               <span class="md:hidden">Sună</span>
             </a>
 
-           <!-- Buton meniu – DOAR pe mobil -->
+       <!-- Buton meniu – DOAR mobil -->
 <button id="menuBtn"
   class="md:hidden inline-flex h-10 w-10 items-center justify-center
          rounded-xl bg-white/70 hover:bg-white transition
@@ -139,7 +139,7 @@
 </div>
 </div>
 
-<!-- Mobile menu – DOAR pe mobil -->
+<!-- Mobile menu -->
 <div id="mobileMenu" class="md:hidden hidden mt-3">
   <div class="glass rounded-2xl p-4 grid gap-3 text-sm">
     <a href="#servicii" class="hover:text-indigo-600 transition">Servicii</a>
@@ -152,45 +152,25 @@
 </nav>
 </header>
 
-<!-- Script meniu mobil -->
+<!-- SCRIPT MENIU MOBIL (OBLIGATORIU) -->
 <script>
-  const menuBtn = document.getElementById("menuBtn");
-  const mobileMenu = document.getElementById("mobileMenu");
+  window.addEventListener("DOMContentLoaded", () => {
+    const menuBtn = document.getElementById("menuBtn");
+    const mobileMenu = document.getElementById("mobileMenu");
 
-  if (menuBtn && mobileMenu) {
+    if (!menuBtn || !mobileMenu) return;
+
     menuBtn.addEventListener("click", () => {
       mobileMenu.classList.toggle("hidden");
     });
 
-    // se închide automat după click pe un link
     mobileMenu.querySelectorAll("a").forEach(link => {
       link.addEventListener("click", () => {
         mobileMenu.classList.add("hidden");
       });
     });
-  }
+  });
 </script>
-
-
-    <!-- aici continuă restul site-ului tău (hero, secțiuni etc.) -->
-    <main class="relative mx-auto max-w-6xl px-4 py-10">
-      <!-- pune conținutul tău aici -->
-    </main>
-  </div>
-
-  <script>
-    // AOS init
-    try { AOS.init({ once: true, duration: 650, offset: 80 }); } catch(e){}
-
-    // Mobile menu toggle
-    const btn = document.getElementById("menuBtn");
-    const menu = document.getElementById("mobileMenu");
-    if (btn && menu) {
-      btn.addEventListener("click", () => menu.classList.toggle("hidden"));
-    }
-  </script>
-</body>
-</html>
 
 
     <!-- HERO -->
