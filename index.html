@@ -108,7 +108,6 @@
 
             <div class="leading-tight min-w-0">
               <div class="font-extrabold tracking-tight truncate">BelaDent</div>
-              <div class="text-xs text-slate-500 truncate">Stomatologie modernă</div>
             </div>
           </a>
 
@@ -129,26 +128,49 @@
               <span class="md:hidden">Sună</span>
             </a>
 
-            <button id="menuBtn"
-              class="md:hidden inline-flex h-10 w-10 items-center justify-center rounded-xl bg-white/70 hover:bg-white transition border border-white/60"
-              aria-label="Meniu">
-              ☰
-            </button>
-          </div>
-        </div>
+           <!-- Buton meniu – DOAR pe mobil -->
+<button id="menuBtn"
+  class="md:hidden inline-flex h-10 w-10 items-center justify-center
+         rounded-xl bg-white/70 hover:bg-white transition
+         border border-white/60"
+  aria-label="Meniu">
+  ☰
+</button>
+</div>
+</div>
 
-        <!-- Mobile menu -->
-        <div id="mobileMenu" class="md:hidden mt-3 hidden">
-          <div class="glass rounded-2xl p-4 grid gap-3 text-sm">
-            <a class="hover:text-indigo-600 transition" href="#servicii">Servicii</a>
-            <a class="hover:text-indigo-600 transition" href="#echipa">Echipă</a>
-            <a class="hover:text-indigo-600 transition" href="#preturi">Prețuri</a>
-            <a class="hover:text-indigo-600 transition" href="#recenzii">Recenzii</a>
-            <a class="hover:text-indigo-600 transition" href="#contact">Contact</a>
-          </div>
-        </div>
-      </nav>
-    </header>
+<!-- Mobile menu – DOAR pe mobil -->
+<div id="mobileMenu" class="md:hidden hidden mt-3">
+  <div class="glass rounded-2xl p-4 grid gap-3 text-sm">
+    <a href="#servicii" class="hover:text-indigo-600 transition">Servicii</a>
+    <a href="#echipa" class="hover:text-indigo-600 transition">Echipă</a>
+    <a href="#preturi" class="hover:text-indigo-600 transition">Prețuri</a>
+    <a href="#recenzii" class="hover:text-indigo-600 transition">Recenzii</a>
+    <a href="#contact" class="hover:text-indigo-600 transition">Contact</a>
+  </div>
+</div>
+</nav>
+</header>
+
+<!-- Script meniu mobil -->
+<script>
+  const menuBtn = document.getElementById("menuBtn");
+  const mobileMenu = document.getElementById("mobileMenu");
+
+  if (menuBtn && mobileMenu) {
+    menuBtn.addEventListener("click", () => {
+      mobileMenu.classList.toggle("hidden");
+    });
+
+    // se închide automat după click pe un link
+    mobileMenu.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
+        mobileMenu.classList.add("hidden");
+      });
+    });
+  }
+</script>
+
 
     <!-- aici continuă restul site-ului tău (hero, secțiuni etc.) -->
     <main class="relative mx-auto max-w-6xl px-4 py-10">
