@@ -1,12 +1,20 @@
 <!doctype html>
 <html lang="ro">
-
-  <head>
+<head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>BelaDent • Clinică Stomatologică</title>
+  <meta name="description" content="BelaDent – stomatologie modernă: implantologie, ortodonție, estetică dentară." />
+  <link rel="icon" type="image/png" href="logo.png">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- AOS -->
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet"/>
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -19,34 +27,6 @@
       }
     }
   </script>
-</head>
-
-<body class="bg-slate-50 font-sans">
-
-<!-- HEADER UNIC (stil violet) -->
-<header class="mx-auto max-w-6xl px-4 py-4">
-  <div class="flex items-center gap-3 bg-white rounded-2xl px-4 py-3 shadow-soft">
-
-    <img src="logo.png" alt="BelaDent logo" class="h-10 w-10 object-contain">
-
-    <div class="leading-tight">
-      <div class="font-bold text-slate-900">BelaDent</div>
-      <div class="text-sm text-slate-600">Stomatologie modernă</div>
-    </div>
-
-  </div>
-</header>
-
-</body>
-</html>
-
-
-
-
-
-  <!-- AOS (scroll animations) -->
-  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet"/>
-  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 
   <style>
     :root { color-scheme: light; }
@@ -71,11 +51,7 @@
       pointer-events:none;
     }
 
-    .shine {
-      position: relative;
-      overflow: hidden;
-      isolation: isolate;
-    }
+    .shine { position: relative; overflow: hidden; isolation: isolate; }
     .shine:after{
       content:"";
       position:absolute;
@@ -121,18 +97,18 @@
       <div class="blob absolute -top-24 -right-24 h-80 w-80 rounded-full bg-emerald-300" style="animation-delay: -4s"></div>
     </div>
 
-    <!-- NAV -->
+    <!-- NAV (UNIC) -->
     <header id="nav" class="sticky top-0 z-50 transition-all">
       <nav class="mx-auto max-w-6xl px-4 py-3">
-        <div class="glass rounded-2xl px-4 py-3 flex items-center justify-between">
-          <a href="#home" class="flex items-center gap-3">
-           <img src="logo.png"
-     alt="BelaDent logo"
-     class="h-10 w-10 rounded-xl object-contain shadow-soft">
+        <!-- schimbat: justify-between -> gap-3, + min-w-0/flex-1 ca sa nu se suprapuna -->
+        <div class="glass rounded-2xl px-4 py-3 flex items-center gap-3">
 
-            <div class="leading-tight">
-              <div class="font-extrabold tracking-tight">BelaDent</div>
-              <div class="text-xs text-slate-500">Stomatologie modernă</div>
+          <a href="#home" class="flex items-center gap-3 min-w-0 flex-1">
+            <img src="logo.png" alt="BelaDent logo" class="h-10 w-10 rounded-xl object-contain shadow-soft">
+
+            <div class="leading-tight min-w-0">
+              <div class="font-extrabold tracking-tight truncate">BelaDent</div>
+              <div class="text-xs text-slate-500 truncate">Stomatologie modernă</div>
             </div>
           </a>
 
@@ -144,15 +120,18 @@
             <a class="hover:text-indigo-600 transition" href="#contact">Contact</a>
           </div>
 
-          <div class="flex items-center gap-2">
-            <!-- Telefon (în loc de Programează-te) -->
+          <div class="flex items-center gap-2 flex-shrink-0">
+            <!-- Telefon: pe mobil nu mai afișează numărul lung (ca să nu se suprapună) -->
             <a href="tel:+37367559956"
-   class="shine inline-flex items-center gap-2 rounded-xl px-4 py-2 text-sm font-semibold text-white bg-slate-900 hover:bg-slate-800 transition shadow-soft">
-  <img src="mobile.png" alt="Telefon" class="w-5 h-5"> +37367559956
-</a>
+               class="shine inline-flex items-center gap-2 rounded-xl px-3 md:px-4 py-2 text-sm font-semibold text-white bg-slate-900 hover:bg-slate-800 transition shadow-soft">
+              <img src="mobile.png" alt="Telefon" class="w-5 h-5">
+              <span class="hidden md:inline">+37367559956</span>
+              <span class="md:hidden">Sună</span>
+            </a>
 
-
-            <button id="menuBtn" class="md:hidden inline-flex h-10 w-10 items-center justify-center rounded-xl bg-white/70 hover:bg-white transition border border-white/60" aria-label="Meniu">
+            <button id="menuBtn"
+              class="md:hidden inline-flex h-10 w-10 items-center justify-center rounded-xl bg-white/70 hover:bg-white transition border border-white/60"
+              aria-label="Meniu">
               ☰
             </button>
           </div>
@@ -170,6 +149,27 @@
         </div>
       </nav>
     </header>
+
+    <!-- aici continuă restul site-ului tău (hero, secțiuni etc.) -->
+    <main class="relative mx-auto max-w-6xl px-4 py-10">
+      <!-- pune conținutul tău aici -->
+    </main>
+  </div>
+
+  <script>
+    // AOS init
+    try { AOS.init({ once: true, duration: 650, offset: 80 }); } catch(e){}
+
+    // Mobile menu toggle
+    const btn = document.getElementById("menuBtn");
+    const menu = document.getElementById("mobileMenu");
+    if (btn && menu) {
+      btn.addEventListener("click", () => menu.classList.toggle("hidden"));
+    }
+  </script>
+</body>
+</html>
+
 
     <!-- HERO -->
     <main id="home" class="relative grain">
