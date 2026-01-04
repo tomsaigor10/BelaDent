@@ -204,7 +204,7 @@
             <div class="mt-8 grid grid-cols-3 gap-3">
               <div class="glass rounded-2xl p-4" data-aos="zoom-in" data-aos-delay="100">
                 <div class="text-xs text-slate-500">Pacienți fericiți</div>
-                <div class="counter text-2xl font-extrabold" data-counter="≈30000">0</div>
+                <div class="counter text-2xl font-extrabold" data-counter="30000">0</div>
               </div>
               <div class="glass rounded-2xl p-4" data-aos="zoom-in" data-aos-delay="200">
                 <div class="text-xs text-slate-500">Ani experiență</div>
@@ -586,40 +586,38 @@
         <div id="programare" class="rounded-3xl bg-slate-900 text-white p-7 shadow-soft" data-aos="fade-left">
           <h3 class="text-2xl font-extrabold tracking-tight">Programare online</h3>
           <p class="mt-2 text-white/70 text-sm">Completezi 30 secunde. Te sunăm pentru confirmare.</p>
-
-        <form
+<form
   action="https://formspree.io/f/maqyazop"
   method="POST"
-  class="mt-6 grid gap-4"
+  class="mt-4 grid gap-3"
 >
-  <div class="grid sm:grid-cols-2 gap-4">
-    <label class="grid gap-2">
-      <span class="text-sm text-white/80">Nume</span>
+  <div class="grid sm:grid-cols-2 gap-3">
+    <label class="grid gap-1.5">
+      <span class="text-xs text-white/80">Nume</span>
       <input
         name="Nume"
         required
-        class="rounded-2xl bg-white/10 border border-white/10 px-4 py-3 outline-none focus:border-white/30"
+        class="rounded-xl bg-white/10 border border-white/10 px-4 py-2.5 outline-none focus:border-white/30"
         placeholder="Ex: Ion Popescu"
       />
     </label>
 
-    <label class="grid gap-2">
-      <span class="text-sm text-white/80">Telefon</span>
+    <label class="grid gap-1.5">
+      <span class="text-xs text-white/80">Telefon</span>
       <input
         name="Telefon"
         required
-        class="rounded-2xl bg-white/10 border border-white/10 px-4 py-3 outline-none focus:border-white/30"
+        class="rounded-xl bg-white/10 border border-white/10 px-4 py-2.5 outline-none focus:border-white/30"
         placeholder="+373 ..."
       />
     </label>
   </div>
 
-
-  <label class="grid gap-2">
-    <span class="text-sm text-white/80">Mesaj (opțional)</span>
+  <label class="grid gap-1.5">
+    <span class="text-xs text-white/80">Mesaj (opțional)</span>
     <textarea
       name="Mesaj"
-      class="min-h-[110px] rounded-2xl bg-white/10 border border-white/10 px-4 py-3 outline-none focus:border-white/30"
+      class="min-h-[80px] rounded-xl bg-white/10 border border-white/10 px-4 py-2.5 outline-none focus:border-white/30"
       placeholder="Spune pe scurt ce te doare / ce îți dorești"
     ></textarea>
   </label>
@@ -627,14 +625,15 @@
   <!-- anti-spam -->
   <input type="text" name="_gotcha" class="hidden" />
 
-  <button class="shine rounded-2xl px-6 py-3 font-semibold bg-white text-slate-900 hover:bg-white/90 transition">
+  <button class="shine rounded-xl px-5 py-2.5 font-semibold bg-white text-slate-900 hover:bg-white/90 transition">
     Trimite programarea
   </button>
 
-  <p class="text-sm text-white/70">
+  <p class="text-xs text-white/70 leading-snug">
     Vei primi confirmare pe email. Te contactăm rapid.
   </p>
 </form>
+
 
 
   <!-- FOOTER -->
