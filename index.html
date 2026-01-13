@@ -98,76 +98,88 @@
     </div>
 
     <!-- NAV (UNIC) -->
-    <header id="nav" class="sticky top-0 z-50 transition-all">
-      <nav class="mx-auto max-w-6xl px-4 py-3">
-        <!-- schimbat: justify-between -> gap-3, + min-w-0/flex-1 ca sa nu se suprapuna -->
-        <div class="glass rounded-2xl px-4 py-3 flex items-center gap-3">
+    <!-- NAV (UNIC) -->
+<header id="nav" class="sticky top-0 z-50 transition-all">
+  <nav class="mx-auto max-w-6xl px-4 py-3">
 
-          <a href="#home" class="flex items-center gap-3 min-w-0 flex-1">
-            <img src="logo.png" alt="BelaDent logo" class="h-10 w-10 rounded-xl object-contain shadow-soft">
+    <div class="glass rounded-2xl px-4 py-3 flex items-center gap-3">
+      <a href="#home" class="flex items-center gap-3 min-w-0 flex-1">
+        <img src="logo.png" alt="BelaDent logo" class="h-10 w-10 rounded-xl object-contain shadow-soft">
 
-            <div class="leading-tight min-w-0">
-              <div class="font-extrabold tracking-tight truncate">BelaDent</div>
-            </div>
-          </a>
+        <div class="leading-tight min-w-0">
+          <div class="font-extrabold tracking-tight truncate">BelaDent</div>
+        </div>
+      </a>
 
-          <div class="hidden md:flex items-center gap-6 text-sm">
-            <a class="hover:text-indigo-600 transition" href="#servicii">Servicii</a>
-            <a class="hover:text-indigo-600 transition" href="#echipa">Echipă</a>
-            <a class="hover:text-indigo-600 transition" href="#preturi">Prețuri</a>
-            <a class="hover:text-indigo-600 transition" href="#recenzii">Recenzii</a>
-            <a class="hover:text-indigo-600 transition" href="#contact">Contact</a>
-          </div>
+      <div class="hidden md:flex items-center gap-6 text-sm">
+        <a class="hover:text-indigo-600 transition" href="#servicii">Servicii</a>
+        <a class="hover:text-indigo-600 transition" href="#echipa">Echipă</a>
+        <a class="hover:text-indigo-600 transition" href="#preturi">Prețuri</a>
+        <a class="hover:text-indigo-600 transition" href="#recenzii">Recenzii</a>
+        <a class="hover:text-indigo-600 transition" href="#contact">Contact</a>
+      </div>
 
-          <div class="flex items-center gap-2 flex-shrink-0">
-            <!-- Telefon: pe mobil nu mai afișează numărul lung (ca să nu se suprapună) -->
-            <a href="tel:+37367559956"
-               class="shine inline-flex items-center gap-2 rounded-xl px-3 md:px-4 py-2 text-sm font-semibold text-white bg-slate-900 hover:bg-slate-800 transition shadow-soft">
-              <img src="mobile.png" alt="Telefon" class="w-5 h-5">
-              <span class="hidden md:inline">+37367559956</span>
-              <span class="md:hidden">Sună</span>
-            </a>
+      <div class="flex items-center gap-2 flex-shrink-0">
+        <a href="tel:+37367559956"
+           class="shine inline-flex items-center gap-2 rounded-xl px-3 md:px-4 py-2 text-sm font-semibold text-white bg-slate-900 hover:bg-slate-800 transition shadow-soft">
+          <img src="mobile.png" alt="Telefon" class="w-5 h-5">
+          <span class="hidden md:inline">+37367559956</span>
+          <span class="md:hidden">Sună</span>
+        </a>
 
-       <!-- Buton meniu – DOAR mobil -->
-<button id="menuBtn"
-  class="md:hidden inline-flex h-10 w-10 items-center justify-center
-         rounded-xl bg-white/70 hover:bg-white transition
-         border border-white/60"
-  aria-label="Meniu">
-  ☰
-</button>
-</div>
-</div>
+        <!-- Buton meniu – DOAR mobil -->
+        <button id="menuBtn"
+          class="md:hidden inline-flex h-10 w-10 items-center justify-center
+                 rounded-xl bg-white/70 hover:bg-white transition
+                 border border-white/60"
+          aria-label="Meniu">
+          ☰
+        </button>
+      </div>
+    </div>
 
-<!-- Mobile menu -->
-<div id="mobileMenu" class="md:hidden hidden mt-3">
-  <div class="glass rounded-2xl p-4 grid gap-3 text-sm">
-    <a href="#servicii" class="hover:text-indigo-600 transition">Servicii</a>
-    <a href="#echipa" class="hover:text-indigo-600 transition">Echipă</a>
-    <a href="#preturi" class="hover:text-indigo-600 transition">Prețuri</a>
-    <a href="#recenzii" class="hover:text-indigo-600 transition">Recenzii</a>
-    <a href="#contact" class="hover:text-indigo-600 transition">Contact</a>
-  </div>
-</div>
-</nav>
+    <!-- Mobile menu -->
+    <div id="mobileMenu" class="md:hidden hidden mt-3 relative z-50">
+      <div class="glass rounded-2xl p-4 grid gap-3 text-sm">
+        <a href="#servicii" class="hover:text-indigo-600 transition">Servicii</a>
+        <a href="#echipa" class="hover:text-indigo-600 transition">Echipă</a>
+        <a href="#preturi" class="hover:text-indigo-600 transition">Prețuri</a>
+        <a href="#recenzii" class="hover:text-indigo-600 transition">Recenzii</a>
+        <a href="#contact" class="hover:text-indigo-600 transition">Contact</a>
+      </div>
+    </div>
+
+  </nav>
 </header>
 
-<!-- SCRIPT MENIU MOBIL (OBLIGATORIU) -->
+<!-- SCRIPT MENIU MOBIL (FUNCTIONAL PE TELEFON) -->
 <script>
-  window.addEventListener("DOMContentLoaded", () => {
+  document.addEventListener("DOMContentLoaded", function () {
     const menuBtn = document.getElementById("menuBtn");
     const mobileMenu = document.getElementById("mobileMenu");
 
     if (!menuBtn || !mobileMenu) return;
 
-    menuBtn.addEventListener("click", () => {
+    menuBtn.addEventListener("click", function (e) {
+      e.preventDefault();
+      e.stopPropagation();
       mobileMenu.classList.toggle("hidden");
     });
 
-    mobileMenu.querySelectorAll("a").forEach(link => {
-      link.addEventListener("click", () => {
+    // Închide meniul după click pe link
+    mobileMenu.querySelectorAll("a").forEach(function (link) {
+      link.addEventListener("click", function () {
         mobileMenu.classList.add("hidden");
       });
+    });
+
+    // Închide meniul dacă apeși în afară
+    document.addEventListener("click", function (e) {
+      if (!mobileMenu.classList.contains("hidden")) {
+        if (!mobileMenu.contains(e.target) && !menuBtn.contains(e.target)) {
+          mobileMenu.classList.add("hidden");
+        }
+      }
     });
   });
 </script>
