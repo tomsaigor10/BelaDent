@@ -98,12 +98,11 @@
     </div>
 
     <!-- NAV (UNIC) -->
-    <!-- NAV (UNIC) -->
-<header id="nav" class="sticky top-0 z-50 transition-all">
-  <nav class="mx-auto max-w-6xl px-4 py-3">
+<header id="nav" class="sticky top-0 z-[9999] transition-all relative pointer-events-auto">
+  <nav class="mx-auto max-w-6xl px-4 py-3 relative pointer-events-auto">
 
-    <div class="glass rounded-2xl px-4 py-3 flex items-center gap-3">
-      <a href="#home" class="flex items-center gap-3 min-w-0 flex-1">
+    <div class="glass rounded-2xl px-4 py-3 flex items-center gap-3 relative pointer-events-auto">
+      <a href="#home" class="flex items-center gap-3 min-w-0 flex-1 pointer-events-auto">
         <img src="logo.png" alt="BelaDent logo" class="h-10 w-10 rounded-xl object-contain shadow-soft">
 
         <div class="leading-tight min-w-0">
@@ -111,7 +110,7 @@
         </div>
       </a>
 
-      <div class="hidden md:flex items-center gap-6 text-sm">
+      <div class="hidden md:flex items-center gap-6 text-sm pointer-events-auto">
         <a class="hover:text-indigo-600 transition" href="#servicii">Servicii</a>
         <a class="hover:text-indigo-600 transition" href="#echipa">Echipă</a>
         <a class="hover:text-indigo-600 transition" href="#preturi">Prețuri</a>
@@ -119,19 +118,19 @@
         <a class="hover:text-indigo-600 transition" href="#contact">Contact</a>
       </div>
 
-      <div class="flex items-center gap-2 flex-shrink-0">
+      <div class="flex items-center gap-2 flex-shrink-0 pointer-events-auto">
         <a href="tel:+37367559956"
-           class="shine inline-flex items-center gap-2 rounded-xl px-3 md:px-4 py-2 text-sm font-semibold text-white bg-slate-900 hover:bg-slate-800 transition shadow-soft">
+           class="shine inline-flex items-center gap-2 rounded-xl px-3 md:px-4 py-2 text-sm font-semibold text-white bg-slate-900 hover:bg-slate-800 transition shadow-soft pointer-events-auto">
           <img src="mobile.png" alt="Telefon" class="w-5 h-5">
           <span class="hidden md:inline">+37367559956</span>
           <span class="md:hidden">Sună</span>
         </a>
 
         <!-- Buton meniu – DOAR mobil -->
-        <button id="menuBtn"
+        <button id="menuBtn" type="button"
           class="md:hidden inline-flex h-10 w-10 items-center justify-center
                  rounded-xl bg-white/70 hover:bg-white transition
-                 border border-white/60"
+                 border border-white/60 pointer-events-auto"
           aria-label="Meniu">
           ☰
         </button>
@@ -139,8 +138,8 @@
     </div>
 
     <!-- Mobile menu -->
-    <div id="mobileMenu" class="md:hidden hidden mt-3 relative z-50">
-      <div class="glass rounded-2xl p-4 grid gap-3 text-sm">
+    <div id="mobileMenu" class="md:hidden hidden mt-3 relative z-[9999] pointer-events-auto">
+      <div class="glass rounded-2xl p-4 grid gap-3 text-sm pointer-events-auto">
         <a href="#servicii" class="hover:text-indigo-600 transition">Servicii</a>
         <a href="#echipa" class="hover:text-indigo-600 transition">Echipă</a>
         <a href="#preturi" class="hover:text-indigo-600 transition">Prețuri</a>
@@ -160,17 +159,26 @@
 
     if (!menuBtn || !mobileMenu) return;
 
-    menuBtn.addEventListener("click", function (e) {
-      e.preventDefault();
-      e.stopPropagation();
+    function toggleMenu(e) {
+      if (e) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
       mobileMenu.classList.toggle("hidden");
-    });
+    }
+
+    // ✅ pe mobil uneori "touchstart" e mai sigur decât click
+    menuBtn.addEventListener("click", toggleMenu, { passive: false });
+    menuBtn.addEventListener("touchstart", toggleMenu, { passive: false });
 
     // Închide meniul după click pe link
     mobileMenu.querySelectorAll("a").forEach(function (link) {
       link.addEventListener("click", function () {
         mobileMenu.classList.add("hidden");
       });
+      link.addEventListener("touchstart", function () {
+        mobileMenu.classList.add("hidden");
+      }, { passive: true });
     });
 
     // Închide meniul dacă apeși în afară
@@ -184,8 +192,6 @@
   });
 </script>
 
-
-    <!-- HERO -->
     <main id="home" class="relative grain">
       <section class="mx-auto max-w-6xl px-4 pt-10 pb-14 md:pt-16">
         <div class="grid lg:grid-cols-2 gap-10 items-center">
