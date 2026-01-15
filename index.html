@@ -153,44 +153,53 @@
 
 <!-- SCRIPT MENIU MOBIL (FUNCTIONAL PE TELEFON) -->
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
+  document.addEventListener("DOMContentLoaded", () => {
     const menuBtn = document.getElementById("menuBtn");
     const mobileMenu = document.getElementById("mobileMenu");
-
     if (!menuBtn || !mobileMenu) return;
 
-    function toggleMenu(e) {
-      if (e) {
-        e.preventDefault();
-        e.stopPropagation();
-      }
-      mobileMenu.classList.toggle("hidden");
-    }
+    const openMenu = () => mobileMenu.classList.remove("hidden");
+    const closeMenu = () => mobileMenu.classList.add("hidden");
+    const isOpen = () => !mobileMenu.classList.contains("hidden");
+    const toggleMenu = () => (isOpen() ? closeMenu() : openMenu());
 
-    // ✅ pe mobil uneori "touchstart" e mai sigur decât click
-    menuBtn.addEventListener("click", toggleMenu, { passive: false });
-    menuBtn.addEventListener("touchstart", toggleMenu, { passive: false });
-
-    // Închide meniul după click pe link
-    mobileMenu.querySelectorAll("a").forEach(function (link) {
-      link.addEventListener("click", function () {
-        mobileMenu.classList.add("hidden");
-      });
-      link.addEventListener("touchstart", function () {
-        mobileMenu.classList.add("hidden");
-      }, { passive: true });
+    // Deschide / închide meniu
+    menuBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      toggleMenu();
     });
 
-    // Închide meniul dacă apeși în afară
-    document.addEventListener("click", function (e) {
-      if (!mobileMenu.classList.contains("hidden")) {
-        if (!mobileMenu.contains(e.target) && !menuBtn.contains(e.target)) {
-          mobileMenu.classList.add("hidden");
+    // Click pe link: închide + scroll corect la anchor
+    mobileMenu.querySelectorAll("a[href^='#']").forEach((a) => {
+      a.addEventListener("click", (e) => {
+        e.preventDefault();
+
+        const id = a.getAttribute("href");
+        const target = document.querySelector(id);
+
+        closeMenu();
+
+        if (target) {
+          target.scrollIntoView({ behavior: "smooth", block: "start" });
+          history.replaceState(null, "", id);
         }
+      });
+    });
+
+    // Închide când apeși în afară
+    document.addEventListener("click", (e) => {
+      if (isOpen() && !mobileMenu.contains(e.target) && !menuBtn.contains(e.target)) {
+        closeMenu();
       }
+    });
+
+    // Dacă ești în meniu și rotești / treci pe desktop, îl închide
+    window.addEventListener("resize", () => {
+      if (window.innerWidth >= 768) closeMenu();
     });
   });
 </script>
+
 
     <main id="home" class="relative grain">
       <section class="mx-auto max-w-6xl px-4 pt-10 pb-14 md:pt-16">
