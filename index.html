@@ -98,33 +98,75 @@
     </div>
 
    <!-- NAV MENU BUTTON (Mobil + Desktop) -->
-<button id="menuBtn" type="button"
-  class="fixed top-5 right-5 z-[99999]
-         inline-flex h-11 w-11 items-center justify-center
-         rounded-2xl bg-white/85 hover:bg-white transition
-         border border-white/60 shadow-soft"
-  aria-label="Meniu">
-  ☰
-</button>
+<!-- NAVBAR (logo + număr + meniu) -->
+<header class="sticky top-0 z-[99980]">
+  <div class="mx-auto max-w-6xl px-4 py-3">
+    <div class="glass rounded-2xl px-4 py-3 flex items-center justify-between gap-3 shadow-soft">
 
-<!-- Overlay (fundal blur când e deschis) -->
+      <!-- Stânga: Logo + Nume -->
+      <a href="#home" class="flex items-center gap-3 min-w-0">
+        <img src="logo.png" alt="BelaDent" class="h-10 w-10 rounded-xl object-contain bg-white/60 p-1">
+        <div class="leading-tight min-w-0">
+          <div class="font-extrabold tracking-tight truncate">BelaDent</div>
+          <div class="text-xs text-slate-600 truncate">Clinică Stomatologică</div>
+        </div>
+      </a>
+
+      <!-- Dreapta: Telefon + Buton meniu -->
+      <div class="flex items-center gap-2">
+
+        <!-- Telefon -->
+        <a href="tel:+37360000000"
+           class="hidden sm:inline-flex items-center gap-2 rounded-xl bg-white/70 hover:bg-white transition
+                  border border-white/60 px-3 py-2 text-sm font-semibold shadow-soft">
+          <!-- icon telefon (svg) -->
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.08 4.18 2 2 0 0 1 4.06 2h3a2 2 0 0 1 2 1.72c.12.86.32 1.7.57 2.5a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.58-1.09a2 2 0 0 1 2.11-.45c.8.25 1.64.45 2.5.57A2 2 0 0 1 22 16.92z"/>
+          </svg>
+          <span>+373 60 000 000</span>
+        </a>
+
+        <!-- Buton meniu -->
+        <button id="menuBtn" type="button"
+          class="inline-flex h-11 w-11 items-center justify-center
+                 rounded-2xl bg-white/80 hover:bg-white transition
+                 border border-white/60 shadow-soft"
+          aria-label="Meniu">
+          ☰
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Overlay -->
 <div id="menuOverlay"
-  class="fixed inset-0 z-[99990] hidden bg-black/30 backdrop-blur-sm">
+  class="fixed inset-0 z-[99985] hidden bg-black/30 backdrop-blur-sm">
 </div>
 
-<!-- Menu Panel -->
+<!-- Panou meniu -->
 <div id="mobileMenu"
-  class="fixed top-20 right-5 z-[99999] hidden w-[240px]">
+  class="fixed top-24 right-4 z-[99990] hidden w-[260px]">
   <div class="glass rounded-2xl p-4 grid gap-3 text-sm shadow-soft">
     <a href="#servicii" class="hover:text-indigo-600 transition font-medium">Servicii</a>
     <a href="#echipa" class="hover:text-indigo-600 transition font-medium">Echipă</a>
     <a href="#preturi" class="hover:text-indigo-600 transition font-medium">Prețuri</a>
     <a href="#recenzii" class="hover:text-indigo-600 transition font-medium">Recenzii</a>
     <a href="#contact" class="hover:text-indigo-600 transition font-medium">Contact</a>
+
+    <!-- Telefon (pe mobil apare aici) -->
+    <a href="tel:+37360000000"
+       class="sm:hidden mt-2 inline-flex items-center justify-center gap-2 rounded-xl
+              bg-white/70 hover:bg-white transition border border-white/60 px-3 py-2 font-semibold">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.08 4.18 2 2 0 0 1 4.06 2h3a2 2 0 0 1 2 1.72c.12.86.32 1.7.57 2.5a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.58-1.09a2 2 0 0 1 2.11-.45c.8.25 1.64.45 2.5.57A2 2 0 0 1 22 16.92z"/>
+      </svg>
+      Sună: +373 60 000 000
+    </a>
   </div>
 </div>
 
-<!-- SCRIPT MENIU (Perfect) -->
+<!-- Script meniu -->
 <script>
 document.addEventListener("DOMContentLoaded", () => {
   const menuBtn = document.getElementById("menuBtn");
@@ -133,16 +175,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (!menuBtn || !mobileMenu || !menuOverlay) return;
 
-  const openMenu = () => {
-    mobileMenu.classList.remove("hidden");
-    menuOverlay.classList.remove("hidden");
-  };
-
-  const closeMenu = () => {
-    mobileMenu.classList.add("hidden");
-    menuOverlay.classList.add("hidden");
-  };
-
+  const openMenu = () => { mobileMenu.classList.remove("hidden"); menuOverlay.classList.remove("hidden"); };
+  const closeMenu = () => { mobileMenu.classList.add("hidden"); menuOverlay.classList.add("hidden"); };
   const isOpen = () => !mobileMenu.classList.contains("hidden");
 
   menuBtn.addEventListener("click", (e) => {
@@ -151,19 +185,14 @@ document.addEventListener("DOMContentLoaded", () => {
     isOpen() ? closeMenu() : openMenu();
   });
 
-  // click overlay = închide
   menuOverlay.addEventListener("click", closeMenu);
 
-  // click pe link = închide + scroll
   mobileMenu.querySelectorAll("a[href^='#']").forEach((a) => {
     a.addEventListener("click", (e) => {
       e.preventDefault();
-
       const id = a.getAttribute("href");
       const target = document.querySelector(id);
-
       closeMenu();
-
       if (target) {
         target.scrollIntoView({ behavior: "smooth", block: "start" });
         history.replaceState(null, "", id);
@@ -171,16 +200,10 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // ESC = închide
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") closeMenu();
-  });
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeMenu(); });
 
-  // click oriunde afară (închide)
   document.addEventListener("click", (e) => {
-    if (isOpen() && !mobileMenu.contains(e.target) && !menuBtn.contains(e.target)) {
-      closeMenu();
-    }
+    if (isOpen() && !mobileMenu.contains(e.target) && !menuBtn.contains(e.target)) closeMenu();
   });
 });
 </script>
