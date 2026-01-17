@@ -97,77 +97,94 @@
       <div class="blob absolute -top-24 -right-24 h-80 w-80 rounded-full bg-emerald-300" style="animation-delay: -4s"></div>
     </div>
 
-    <!-- NAV (UNIC) -->
-<!-- Buton meniu – DOAR mobil -->
+   <!-- NAV MENU BUTTON (Mobil + Desktop) -->
 <button id="menuBtn" type="button"
-  class="md:hidden inline-flex h-10 w-10 items-center justify-center
-         rounded-xl bg-white/70 hover:bg-white transition
-         border border-white/60 pointer-events-auto"
+  class="fixed top-5 right-5 z-[99999]
+         inline-flex h-11 w-11 items-center justify-center
+         rounded-2xl bg-white/85 hover:bg-white transition
+         border border-white/60 shadow-soft"
   aria-label="Meniu">
   ☰
 </button>
 
-<!-- Mobile menu -->
-<div id="mobileMenu" class="md:hidden hidden mt-3 relative z-[9999] pointer-events-auto">
-  <div class="glass rounded-2xl p-4 grid gap-3 text-sm pointer-events-auto">
-    <a href="#servicii" class="hover:text-indigo-600 transition">Servicii</a>
-    <a href="#echipa" class="hover:text-indigo-600 transition">Echipă</a>
-    <a href="#preturi" class="hover:text-indigo-600 transition">Prețuri</a>
-    <a href="#recenzii" class="hover:text-indigo-600 transition">Recenzii</a>
-    <a href="#contact" class="hover:text-indigo-600 transition">Contact</a>
+<!-- Overlay (fundal blur când e deschis) -->
+<div id="menuOverlay"
+  class="fixed inset-0 z-[99990] hidden bg-black/30 backdrop-blur-sm">
+</div>
+
+<!-- Menu Panel -->
+<div id="mobileMenu"
+  class="fixed top-20 right-5 z-[99999] hidden w-[240px]">
+  <div class="glass rounded-2xl p-4 grid gap-3 text-sm shadow-soft">
+    <a href="#servicii" class="hover:text-indigo-600 transition font-medium">Servicii</a>
+    <a href="#echipa" class="hover:text-indigo-600 transition font-medium">Echipă</a>
+    <a href="#preturi" class="hover:text-indigo-600 transition font-medium">Prețuri</a>
+    <a href="#recenzii" class="hover:text-indigo-600 transition font-medium">Recenzii</a>
+    <a href="#contact" class="hover:text-indigo-600 transition font-medium">Contact</a>
   </div>
 </div>
 
-<!-- SCRIPT MENIU MOBIL (FUNCTIONAL PE TELEFON) -->
+<!-- SCRIPT MENIU (Perfect) -->
 <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const menuBtn = document.getElementById("menuBtn");
-    const mobileMenu = document.getElementById("mobileMenu");
+document.addEventListener("DOMContentLoaded", () => {
+  const menuBtn = document.getElementById("menuBtn");
+  const mobileMenu = document.getElementById("mobileMenu");
+  const menuOverlay = document.getElementById("menuOverlay");
 
-    if (!menuBtn || !mobileMenu) return;
+  if (!menuBtn || !mobileMenu || !menuOverlay) return;
 
-    const openMenu = () => mobileMenu.classList.remove("hidden");
-    const closeMenu = () => mobileMenu.classList.add("hidden");
-    const isOpen = () => !mobileMenu.classList.contains("hidden");
-    const toggleMenu = () => (isOpen() ? closeMenu() : openMenu());
+  const openMenu = () => {
+    mobileMenu.classList.remove("hidden");
+    menuOverlay.classList.remove("hidden");
+  };
 
-    // Deschide / închide meniu
-    menuBtn.addEventListener("click", (e) => {
+  const closeMenu = () => {
+    mobileMenu.classList.add("hidden");
+    menuOverlay.classList.add("hidden");
+  };
+
+  const isOpen = () => !mobileMenu.classList.contains("hidden");
+
+  menuBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    isOpen() ? closeMenu() : openMenu();
+  });
+
+  // click overlay = închide
+  menuOverlay.addEventListener("click", closeMenu);
+
+  // click pe link = închide + scroll
+  mobileMenu.querySelectorAll("a[href^='#']").forEach((a) => {
+    a.addEventListener("click", (e) => {
       e.preventDefault();
-      e.stopPropagation();
-      toggleMenu();
-    });
 
-    // Click pe link: închide + scroll corect la anchor
-    mobileMenu.querySelectorAll("a[href^='#']").forEach((a) => {
-      a.addEventListener("click", (e) => {
-        e.preventDefault();
+      const id = a.getAttribute("href");
+      const target = document.querySelector(id);
 
-        const id = a.getAttribute("href");
-        const target = document.querySelector(id);
+      closeMenu();
 
-        closeMenu();
-
-        if (target) {
-          target.scrollIntoView({ behavior: "smooth", block: "start" });
-          history.replaceState(null, "", id);
-        }
-      });
-    });
-
-    // Închide când apeși în afară
-    document.addEventListener("click", (e) => {
-      if (isOpen() && !mobileMenu.contains(e.target) && !menuBtn.contains(e.target)) {
-        closeMenu();
+      if (target) {
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
+        history.replaceState(null, "", id);
       }
     });
-
-    // Dacă treci pe desktop îl închide
-    window.addEventListener("resize", () => {
-      if (window.innerWidth >= 768) closeMenu();
-    });
   });
+
+  // ESC = închide
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeMenu();
+  });
+
+  // click oriunde afară (închide)
+  document.addEventListener("click", (e) => {
+    if (isOpen() && !mobileMenu.contains(e.target) && !menuBtn.contains(e.target)) {
+      closeMenu();
+    }
+  });
+});
 </script>
+
 
     <main id="home" class="relative grain">
       <section class="mx-auto max-w-6xl px-4 pt-10 pb-14 md:pt-16">
